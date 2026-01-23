@@ -81,3 +81,18 @@ button {
   padding: 8px 12px;
   margin-left: 5px;
 }
+.message {
+  padding: 8px 12px;
+  margin: 6px;
+  border-radius: 8px;
+  max-width: 60%;
+}
+
+.sent {
+  background: #dcf8c6;
+  margin-left: auto;
+}
+
+.received {
+  background: #ffffff;
+}
