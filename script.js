@@ -1,3 +1,10 @@
+let chats = {
+  Ali: [],
+  Ahmed: [],
+  Sara: []
+};
+
+let currentUser = "Ali";
 const sendBtn = document.querySelector("button");
 const input = document.querySelector("input");
 const messages = document.querySelector(".messages");
@@ -28,17 +35,28 @@ function autoReply() {
 }
 function sendMessage() {
   const text = input.value.trim();
-
   if (text === "") return;
 
-  const msg = document.createElement("div");
-  msg.classList.add("message", "sent");
-  msg.innerText = text;
-
-  messages.appendChild(msg);
+  chats[currentUser].push({ text, type: "sent" });
   input.value = "";
 
-  messages.scrollTop = messages.scrollHeight;
+  renderChat();
 
-  setTimeout(autoReply, 1000);
+  setTimeout(() => {
+    chats[currentUser].push({ text: "Okay 🙂", type: "received" });
+    renderChat();
+  }, 1000);
 }
+function renderChat() {
+  messages.innerHTML = "";
+
+  chats[currentUser].forEach(msg => {
+    const div = document.createElement("div");
+    div.classList.add("message", msg.type);
+    div.innerText = msg.text;
+    messages.appendChild(div);
+  });
+
+  messages.scrollTop = messages.scrollHeight;
+}
+
