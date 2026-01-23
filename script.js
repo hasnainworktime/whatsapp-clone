@@ -26,11 +26,19 @@ function autoReply() {
   messages.appendChild(reply);
   messages.scrollTop = messages.scrollHeight;
 }
-function autoReply() {
-  const reply = document.createElement("div");
-  reply.classList.add("message", "received");
-  reply.innerText = "Okay 🙂";
+function sendMessage() {
+  const text = input.value.trim();
 
-  messages.appendChild(reply);
+  if (text === "") return;
+
+  const msg = document.createElement("div");
+  msg.classList.add("message", "sent");
+  msg.innerText = text;
+
+  messages.appendChild(msg);
+  input.value = "";
+
   messages.scrollTop = messages.scrollHeight;
+
+  setTimeout(autoReply, 1000);
 }
