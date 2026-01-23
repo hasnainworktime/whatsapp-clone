@@ -1,7 +1,7 @@
 let chats = {
   Ali: [],
   Ahmed: [],
-  Hasnain: []
+  Muhammad: []
 };
 
 let currentUser = "Ali";
