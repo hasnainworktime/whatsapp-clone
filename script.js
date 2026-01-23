@@ -59,4 +59,9 @@ function renderChat() {
 
   messages.scrollTop = messages.scrollHeight;
 }
+function openChat(name) {
+  currentUser = name;
+  document.getElementById("chat-name").innerText = name;
+  renderChat();
+}
 
