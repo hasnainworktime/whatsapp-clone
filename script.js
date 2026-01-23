@@ -26,3 +26,11 @@ function autoReply() {
   messages.appendChild(reply);
   messages.scrollTop = messages.scrollHeight;
 }
+function autoReply() {
+  const reply = document.createElement("div");
+  reply.classList.add("message", "received");
+  reply.innerText = "Okay 🙂";
+
+  messages.appendChild(reply);
+  messages.scrollTop = messages.scrollHeight;
+}
