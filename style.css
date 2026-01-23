@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ece5dd;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 30%;
+  background: #075e54;
+  color: white;
+  padding: 10px;
+}
+
+.sidebar h2 {
+  margin: 10px 0;
+}
+
+.contact {
+  padding: 10px;
+  background: #128c7e;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.contact.active {
+  background: #25d366;
+}
+
+.chat {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.chat-header {
+  background: #075e54;
+  color: white;
+  padding: 10px;
+}
+
+.messages {
+  flex: 1;
+  padding: 10px;
+  background: #ece5dd;
+}
+
+.message {
+  padding: 8px;
+  margin: 5px;
+  max-width: 60%;
+  border-radius: 5px;
+}
+
+.received {
+  background: white;
+}
+
+.sent {
+  background: #dcf8c6;
+  margin-left: auto;
+}
+
+.input-box {
+  display: flex;
+  padding: 10px;
+  background: #f0f0f0;
+}
+
+input {
+  flex: 1;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 12px;
+  margin-left: 5px;
+}
