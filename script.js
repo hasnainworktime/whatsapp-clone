@@ -41,3 +41,6 @@ function openChat(name) {
   document.getElementById("chat-name").innerText = name;
   renderChat();
 }
+<script src="script.js"></script>
+</body>
+</html>
