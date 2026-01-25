@@ -1,7 +1,6 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #ece5dd;
 }
 
 .app {
@@ -10,55 +9,52 @@ body {
 }
 
 .sidebar {
-  width: 30%;
+  width: 25%;
   background: #075e54;
   color: white;
-  padding: 10px;
 }
 
 .sidebar h2 {
-  margin: 10px 0;
+  padding: 15px;
+  margin: 0;
+  background: #064c44;
 }
 
 .contact {
-  padding: 10px;
-  background: #128c7e;
-  margin-bottom: 5px;
+  padding: 15px;
   cursor: pointer;
+  border-bottom: 1px solid #0a6b61;
 }
 
-.contact.active {
-  background: #25d366;
+.contact:hover {
+  background: #0a6b61;
 }
 
 .chat {
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: #ece5dd;
 }
 
 .chat-header {
+  padding: 15px;
   background: #075e54;
   color: white;
-  padding: 10px;
+  font-weight: bold;
 }
 
 .messages {
   flex: 1;
-  padding: 10px;
-  background: #ece5dd;
+  padding: 15px;
+  overflow-y: auto;
 }
 
 .message {
-  padding: 8px;
-  margin: 5px;
+  margin: 10px 0;
+  padding: 10px;
   max-width: 60%;
-  border-radius: 5px;
-}
-
-.received {
-  background: white;
+  border-radius: 8px;
 }
 
 .sent {
@@ -66,33 +62,23 @@ body {
   margin-left: auto;
 }
 
-.input-box {
+.received {
+  background: white;
+  margin-right: auto;
+}
+
+.input-area {
   display: flex;
   padding: 10px;
   background: #f0f0f0;
 }
 
-input {
+.input-area input {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
 }
 
-button {
-  padding: 8px 12px;
+.input-area button {
+  padding: 10px 15px;
   margin-left: 5px;
-}
-.message {
-  padding: 8px 12px;
-  margin: 6px;
-  border-radius: 8px;
-  max-width: 60%;
-}
-
-.sent {
-  background: #dcf8c6;
-  margin-left: auto;
-}
-
-.received {
-  background: #ffffff;
 }
