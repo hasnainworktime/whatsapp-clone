@@ -1,46 +1,47 @@
-const input = document.getElementById("messageInput");
-const messages = document.getElementById("messages");
+let currentChat = "Muhammad";
 
 let chats = {
+  Muhammad: [],
   Ali: [],
-  Ahmed: [],
-  Muhammad: []
+  Ahmed: []
 };
 
-let currentUser = "Ali";
+function openChat(name) {
+  currentChat = name;
+
+  document.getElementById("chatName").innerText = name;
+
+  let messagesDiv = document.getElementById("messages");
+  messagesDiv.innerHTML = "";
+
+  chats[name].forEach(msg => {
+    addMessage(msg.text, msg.type);
+  });
+}
 
 function sendMessage() {
-  const text = input.value.trim();
+  let input = document.getElementById("messageInput");
+  let text = input.value.trim();
   if (text === "") return;
 
-  chats[currentUser].push({ text, type: "sent" });
-  input.value = "";
-  renderChat();
+  chats[currentChat].push({ text, type: "sent" });
+  addMessage(text, "sent");
 
+  input.value = "";
+
+  // Auto reply
   setTimeout(() => {
-    chats[currentUser].push({ text: "Auto reply 🙂", type: "received" });
-    renderChat();
+    let reply = "Auto reply 🙂";
+    chats[currentChat].push({ text: reply, type: "received" });
+    addMessage(reply, "received");
   }, 1000);
 }
 
-function renderChat() {
-  messages.innerHTML = "";
-
-  chats[currentUser].forEach(msg => {
-    const div = document.createElement("div");
-    div.className = "message " + msg.type;
-    div.innerText = msg.text;
-    messages.appendChild(div);
-  });
-
-  messages.scrollTop = messages.scrollHeight;
+function addMessage(text, type) {
+  let messagesDiv = document.getElementById("messages");
+  let msg = document.createElement("div");
+  msg.className = `message ${type}`;
+  msg.innerText = text;
+  messagesDiv.appendChild(msg);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
-
-function openChat(name) {
-  currentUser = name;
-  document.getElementById("chat-name").innerText = name;
-  renderChat();
-}
-<script src="script.js"></script>
-</body>
-</html>
