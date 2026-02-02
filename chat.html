@@ -54,10 +54,19 @@
   </style>
 </head>
 <body>
-
-  <div class="header">
-    <h3 id="userName"></h3>
-  </div>
+<div class="header">
+  <span id="userName"></span>
+  <button onclick="logout()" style="
+    float:right;
+    background:red;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    cursor:pointer;
+  ">
+    Logout
+  </button>
+</div>
 
   <div class="chat-box" id="chatBox"></div>
 
@@ -75,7 +84,33 @@
 
     document.getElementById("userName").innerText = "Hello, " + user;
 
-    function sendMessage() {
+function sendMessage() {
+  const input = document.getElementById("messageInput");
+  const chatBox = document.getElementById("chatBox");
+
+  if (input.value === "") return;
+
+  const msgText = input.value;
+
+  addMessage("You", msgText);
+  input.value = "";
+
+  setTimeout(() => {
+    addMessage("Bot", "Auto reply 🤖");
+  }, 1000);
+}
+function addMessage(sender, text) {
+  const chatBox = document.getElementById("chatBox");
+
+  const msg = document.createElement("div");
+  msg.className = "message";
+  msg.innerText = sender + ": " + text;
+
+  chatBox.appendChild(msg);
+
+  saveMessage(sender, text);
+}
+
       const input = document.getElementById("messageInput");
       const chatBox = document.getElementById("chatBox");
 
@@ -98,6 +133,22 @@
       }, 1000);
     }
   </script>
-
+function logout() {
+  localStorage.removeItem("username");
+  localStorage.removeItem("messages");
+  window.location.href = "index.html";
+}
+ 
 </body>
 </html>
+window.onload = function () {
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  messages.forEach(msg => {
+    const chatBox = document.getElementById("chatBox");
+    const div = document.createElement("div");
+    div.className = "message";
+    div.innerText = msg.sender + ": " + msg.text;
+    chatBox.appendChild(div);
+  });
+};
