@@ -110,6 +110,17 @@ function addMessage(sender, text) {
 
   saveMessage(sender, text);
 }
+window.onload = function () {
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  messages.forEach(msg => {
+    const chatBox = document.getElementById("chatBox");
+    const div = document.createElement("div");
+    div.className = "message";
+    div.innerText = msg.sender + ": " + msg.text;
+    chatBox.appendChild(div);
+  });
+};
 
       const input = document.getElementById("messageInput");
       const chatBox = document.getElementById("chatBox");
@@ -141,14 +152,3 @@ function logout() {
  
 </body>
 </html>
-window.onload = function () {
-  let messages = JSON.parse(localStorage.getItem("messages")) || [];
-
-  messages.forEach(msg => {
-    const chatBox = document.getElementById("chatBox");
-    const div = document.createElement("div");
-    div.className = "message";
-    div.innerText = msg.sender + ": " + msg.text;
-    chatBox.appendChild(div);
-  });
-};
