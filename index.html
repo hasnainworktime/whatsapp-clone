@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>WhatsApp Clone</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>Login - WhatsApp Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #075E54;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: #075E54;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #25D366;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<div class="app">
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>WhatsApp</h2>
-
-    <div class="contact" onclick="openChat('Muhammad')">Muhammad</div>
-    <div class="contact" onclick="openChat('Ali')">Ali</div>
-    <div class="contact" onclick="openChat('Ahmed')">Ahmed</div>
-  </div>
-
-  <!-- Chat Area -->
-  <div class="chat">
-    <div class="chat-header" id="chatName">Muhammad</div>
-
-    <div class="messages" id="messages"></div>
-
-    <div class="input-area">
-      <input type="text" id="messageInput" placeholder="Type a message">
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-
+<div class="login-box">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Enter your name">
+    <button onclick="login()">Login</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+    function login() {
+        const name = document.getElementById("username").value;
+
+        if (name === "") {
+            alert("Please enter your name");
+            return;
+        }
+
+        // Save name
+        localStorage.setItem("username", name);
+
+        // Go to chat page
+        window.location.href = "chat.html";
+    }
+</script>
+
 </body>
 </html>
