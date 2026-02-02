@@ -3,152 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>WhatsApp Clone - Chat</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #ece5dd;
-    }
-
-    .header {
-      background: #075e54;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .chat-box {
-      height: 400px;
-      padding: 10px;
-      overflow-y: auto;
-      background: #fff;
-    }
-
-    .message {
-      margin: 5px 0;
-      padding: 8px;
-      background: #dcf8c6;
-      width: fit-content;
-      border-radius: 5px;
-    }
-
-    .input-box {
-      display: flex;
-      padding: 10px;
-      background: #f0f0f0;
-    }
-
-    input {
-      flex: 1;
-      padding: 10px;
-    }
-
-    button {
-      padding: 10px;
-      background: #25D366;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="header">
-  <span id="userName"></span>
-  <button onclick="logout()" style="
-    float:right;
-    background:red;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    cursor:pointer;
-  ">
-    Logout
-  </button>
-</div>
 
-  <div class="chat-box" id="chatBox"></div>
+  <!-- HEADER -->
+  <div class="header" style="background:#075E54;color:white;padding:10px;">
+    <span id="userName">User</span>
 
-  <div class="input-box">
-    <input type="text" id="messageInput" placeholder="Type a message">
-    <button onclick="sendMessage()">Send</button>
+    <button onclick="logout()" style="
+      float:right;
+      background:red;
+      color:white;
+      border:none;
+      padding:5px 10px;
+      cursor:pointer;
+    ">
+      Logout
+    </button>
   </div>
 
-  <script> function logout() {
-  localStorage.removeItem("username");
-  localStorage.removeItem("messages");
-  window.location.href = "index.html";
-}
- 
-    const user = localStorage.getItem("username");
+  <!-- CHAT AREA -->
+  <div id="chatBox" style="
+    height:400px;
+    padding:10px;
+    overflow-y:auto;
+    background:#f0f0f0;
+  ">
+  </div>
 
-    if (!user) {
-      window.location.href = "index.html";
-    }
+  <!-- INPUT AREA -->
+  <div style="display:flex;padding:10px;background:#eee;">
+    <input id="messageInput" type="text" placeholder="Type a message"
+      style="flex:1;padding:10px;">
+    <button onclick="sendMessage()" style="
+      padding:10px;
+      background:#25D366;
+      border:none;
+      color:white;
+    ">
+      Send
+    </button>
+  </div>
 
-    document.getElementById("userName").innerText = "Hello, " + user;
+<script>
+  // Load username
+  const username = localStorage.getItem("username") || "User";
+  document.getElementById("userName").innerText = username;
 
-function sendMessage() {
-  const input = document.getElementById("messageInput");
-  const chatBox = document.getElementById("chatBox");
-
-  if (input.value === "") return;
-
-  const msgText = input.value;
-
-  addMessage("You", msgText);
-  input.value = "";
-
-  setTimeout(() => {
-    addMessage("Bot", "Auto reply 🤖");
-  }, 1000);
-}
-function addMessage(sender, text) {
-  const chatBox = document.getElementById("chatBox");
-
-  const msg = document.createElement("div");
-  msg.className = "message";
-  msg.innerText = sender + ": " + text;
-
-  chatBox.appendChild(msg);
-
-  saveMessage(sender, text);
-}
-window.onload = function () {
+  // Load old messages
   let messages = JSON.parse(localStorage.getItem("messages")) || [];
 
-  messages.forEach(msg => {
+  messages.forEach(m => addMessage(m.sender, m.text, false));
+
+  function sendMessage() {
+    const input = document.getElementById("messageInput");
+    if (input.value === "") return;
+
+    addMessage("You", input.value, true);
+    input.value = "";
+
+    setTimeout(() => {
+      addMessage("Bot", "Auto reply 🤖", true);
+    }, 1000);
+  }
+
+  function addMessage(sender, text, save) {
     const chatBox = document.getElementById("chatBox");
     const div = document.createElement("div");
-    div.className = "message";
-    div.innerText = msg.sender + ": " + msg.text;
+
+    div.style.margin = "5px 0";
+    div.innerText = sender + ": " + text;
+
     chatBox.appendChild(div);
-  });
-};
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-      const input = document.getElementById("messageInput");
-      const chatBox = document.getElementById("chatBox");
-
-      if (input.value === "") return;
-
-      const msg = document.createElement("div");
-      msg.className = "message";
-      msg.innerText = input.value;
-
-      chatBox.appendChild(msg);
-      input.value = "";
-
-      // auto reply
-      setTimeout(() => {
-        const reply = document.createElement("div");
-        reply.className = "message";
-        reply.style.background = "#fff";
-        reply.innerText = "Auto reply 🤖";
-        chatBox.appendChild(reply);
-      }, 1000);
+    if (save) {
+      messages.push({ sender, text });
+      localStorage.setItem("messages", JSON.stringify(messages));
     }
-  </script>
+  }
+
+  function logout() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("messages");
+    window.location.href = "index.html";
+  }
+</script>
 
 </body>
 </html>
