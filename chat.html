@@ -75,7 +75,12 @@
     <button onclick="sendMessage()">Send</button>
   </div>
 
-  <script>
+  <script> function logout() {
+  localStorage.removeItem("username");
+  localStorage.removeItem("messages");
+  window.location.href = "index.html";
+}
+ 
     const user = localStorage.getItem("username");
 
     if (!user) {
@@ -144,11 +149,6 @@ window.onload = function () {
       }, 1000);
     }
   </script>
-function logout() {
-  localStorage.removeItem("username");
-  localStorage.removeItem("messages");
-  window.location.href = "index.html";
-}
- 
+
 </body>
 </html>
