@@ -5,6 +5,26 @@ let chats = {
   Ali: [],
   Ahmed: []
 };
+function loadContacts() {
+  const list = document.getElementById("contactList");
+  list.innerHTML = "";
+
+  contacts.forEach(name => {
+    const div = document.createElement("div");
+    div.innerText = name;
+    div.style.padding = "10px";
+    div.style.cursor = "pointer";
+
+    div.onclick = () => switchChat(name);
+
+    list.appendChild(div);
+  });
+}
+function switchChat(name) {
+  currentChat = name;
+  document.getElementById("userName").innerText = name;
+  document.getElementById("chatBox").innerHTML = "";
+}
 
 function openChat(name) {
   currentChat = name;
@@ -45,3 +65,4 @@ function addMessage(text, type) {
   messagesDiv.appendChild(msg);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+loadContacts();
