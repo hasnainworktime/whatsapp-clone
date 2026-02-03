@@ -1,3 +1,5 @@
+let contacts = ["Ali", "Ahmed", "Muhammad"];
+let currentChat = "Ali";
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +10,42 @@
 <body>
 
   <!-- HEADER -->
+  <div style="display:flex;height:100vh;">
+
+  <!-- CONTACT LIST -->
+  <div id="contactList" style="
+    width:200px;
+    background:#128C7E;
+    color:white;
+    padding:10px;
+  ">
+  </div>  <!-- CHAT AREA -->
+  <div style="flex:1;display:flex;flex-direction:column;">
+
+    <div id="chatBox" style="
+      flex:1;
+      padding:10px;
+      overflow-y:auto;
+      background:#f0f0f0;
+    "></div>
+
+    <div style="display:flex;padding:10px;background:#eee;">
+      <input id="messageInput" type="text" placeholder="Type a message"
+        style="flex:1;padding:10px;">
+      <button onclick="sendMessage()" style="
+        padding:10px;
+        background:#25D366;
+        border:none;
+        color:white;
+      ">
+        Send
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
   <div class="header" style="background:#075E54;color:white;padding:10px;">
     <span id="userName">User</span>
 
